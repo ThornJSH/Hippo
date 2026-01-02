@@ -12,7 +12,7 @@ export const FORBIDDEN_RADIUS_HIPO = 50;
 const baseLevels: LevelConfig[] = [
   {
     id: 1,
-    hipoPos: { x: 200, y: 550 }, // 사용자가 지정한 하단 중앙 근처 배치
+    hipoPos: { x: 200, y: 550 }, // 사용자가 지정한 동그라미 위치 (바닥은 580)
     nests: [{ x: 200, y: 120 }],
     obstacles: [
       { x: 100, y: 280, w: 60, h: 20 },

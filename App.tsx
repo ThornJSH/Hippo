@@ -109,11 +109,11 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border-[min(12px,2.5vw)] border-slate-800 rounded-[min(3.5rem,10vw)] overflow-hidden bg-white group flex items-center justify-center"
+      <div className="relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border-[min(10px,2vw)] border-slate-800 rounded-[min(3.5rem,10vw)] overflow-hidden bg-white group flex items-center justify-center shrink-0"
         style={{
-          height: 'min(724px, 82dvh)',
+          height: 'min(724px, 75dvh)',
           aspectRatio: '424 / 724',
-          maxWidth: '95vw'
+          maxWidth: '92vw'
         }}>
         <div className="absolute inset-0 border-[min(6px,1.2vw)] border-white/10 pointer-events-none z-30 rounded-[min(2.8rem,8vw)]"></div>
 
