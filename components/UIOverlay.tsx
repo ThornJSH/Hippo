@@ -19,8 +19,8 @@ const UIOverlay: React.FC<UIOverlayProps> = ({ gameState, onStart, onNext, onRes
       <div className="bg-white p-8 rounded-3xl shadow-2xl text-center max-w-sm w-full border-4 border-cyan-400">
         {gameState === GameState.START && (
           <>
-            <h1 className="text-4xl font-black text-cyan-600 mb-2 uppercase">아기 하마 구하기</h1>
-            <p className="text-gray-600 mb-6">굶주린 피라니아들로부터 귀여운 아기 하마를 지켜주세요!</p>
+            <h1 className="text-3xl font-black text-cyan-600 mb-2 uppercase leading-tight">아기 하마<br />구하기</h1>
+            <p className="text-xs text-gray-500 mb-8 px-4">굶주린 피라니아들로부터<br />귀여운 아기 하마를 지켜주세요!</p>
             <button
               onClick={onStart}
               className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-4 rounded-xl shadow-lg transition transform hover:scale-105"
@@ -48,7 +48,7 @@ const UIOverlay: React.FC<UIOverlayProps> = ({ gameState, onStart, onNext, onRes
           <>
             <div className="text-6xl mb-4">🐟</div>
             <h2 className="text-3xl font-bold text-red-600 mb-2">런! 런!</h2>
-            <p className="text-gray-600 mb-6">피라니아들이 너무 배가 고팠나 봐요. 다시 시도해볼까요?</p>
+            <p className="text-xs text-gray-500 mb-8 px-4">피라니아들이 너무 배가 고팠나 봐요.<br />다시 시도해볼까요?</p>
             <div className="flex flex-col gap-3">
               <button
                 onClick={onRestart}

@@ -93,13 +93,25 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-center bg-cyan-100 overflow-hidden select-none">
-      <div className="absolute top-4 left-4 z-10 bg-white/80 p-3 rounded-xl shadow-lg border-2 border-cyan-400">
-        <h1 className="text-xl font-bold text-cyan-700">레벨 {currentLevelIdx + 1} / 50</h1>
-        <p className="text-sm font-semibold text-cyan-600">점수: {score}</p>
+    <div className="relative w-full h-screen flex flex-col items-center justify-center bg-slate-900 overflow-hidden select-none">
+      {/* 배경 장식 (모바일 밖 영역) */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full blur-[120px]"></div>
       </div>
 
-      <div className="relative shadow-2xl border-8 border-blue-900/20 rounded-2xl overflow-hidden bg-white">
+      <div className="z-10 mb-4 flex flex-col items-center">
+        <h1 className="text-2xl font-black text-cyan-400 tracking-wider mb-1">LEVEL {currentLevelIdx + 1}</h1>
+        <div className="flex items-center gap-4">
+          <div className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
+            <p className="text-xs font-bold text-white uppercase tracking-tighter">Score: {score}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border-[12px] border-slate-800 rounded-[3.5rem] overflow-hidden bg-white group" style={{ width: '424px', height: '724px' }}>
+        <div className="absolute inset-0 border-[6px] border-white/10 pointer-events-none z-30 rounded-[2.8rem]"></div>
+
         <Game
           level={currentLevel}
           gameState={gameState}
@@ -107,6 +119,7 @@ const App: React.FC = () => {
           onWin={handleWin}
           onLose={handleLose}
           images={images}
+          levelNum={currentLevelIdx + 1}
         />
 
         <UIOverlay
@@ -119,10 +132,11 @@ const App: React.FC = () => {
         />
       </div>
 
-      <div className="mt-6 text-cyan-900 font-medium text-center max-w-md px-4">
-        <p className="text-sm opacity-80 mb-2">
-          <b>규칙:</b> 잉크가 제한되어 있습니다. 둥지와 아기 하마 주변에는 선을 그을 수 없습니다.<br />
-          선을 효율적으로 사용하여 모든 방향에서 오는 피라니아를 막으세요!
+      <div className="mt-6 text-white/60 font-medium text-center max-w-xs px-4">
+        <p className="text-[10px] leading-relaxed">
+          <span className="text-cyan-400 font-bold underline underline-offset-4">RULE</span><br />
+          잉크는 제한되어 있습니다. 둥지와 아기 하마 주변에는 선을 그을 수 없습니다.<br />
+          모든 방향에서 오는 피라니아를 효율적으로 막아보세요!
         </p>
       </div>
     </div>
