@@ -93,27 +93,26 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="relative w-full h-[100dvh] flex flex-col items-center justify-center bg-slate-900 overflow-hidden select-none p-2 box-border">
+    <div className="relative w-full h-[100dvh] flex flex-col items-center justify-center bg-slate-900 overflow-hidden select-none p-4 box-border">
       {/* 배경 장식 */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600 rounded-full blur-[120px]"></div>
       </div>
 
-      {/* 상단 레이블 (높이 축소 및 간격 조절) */}
-      <div className="z-10 mb-2 flex flex-col items-center shrink-0">
-        <h1 className="text-xl font-black text-cyan-400 tracking-wider mb-0.5">LEVEL {currentLevelIdx + 1}</h1>
-        <div className="px-2.5 py-0.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-          <p className="text-[10px] font-bold text-white uppercase tracking-tighter">Score: {score}</p>
-        </div>
+      {/* 상단 레이블 (최소화) */}
+      <div className="z-40 absolute top-8 flex items-center gap-3 px-4 py-1.5 bg-slate-900/60 backdrop-blur-md rounded-full border border-white/10 shrink-0">
+        <h1 className="text-xs font-black text-cyan-400 tracking-widest uppercase">Lv.{currentLevelIdx + 1}</h1>
+        <div className="w-[1px] h-3 bg-white/20"></div>
+        <p className="text-[10px] font-bold text-white/80 uppercase">Score: {score}</p>
       </div>
 
-      {/* 메인 게임 프레임 (높이 제한을 60dvh로 강화하여 하단 공간 확보) */}
-      <div className="relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border-[min(10px,2vw)] border-slate-800 rounded-[min(3.5rem,10vw)] overflow-hidden bg-white group flex items-center justify-center shrink-0"
+      {/* 메인 게임 프레임 (다시 화면을 크게 사용) */}
+      <div className="relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border-[min(12px,2.5vw)] border-slate-800 rounded-[min(3.5rem,10vw)] overflow-hidden bg-white group flex items-center justify-center shrink-0"
         style={{
-          height: 'min(724px, 60dvh)',
+          height: 'min(724px, 85dvh)',
           aspectRatio: '424 / 724',
-          maxWidth: '90vw'
+          maxWidth: '95vw'
         }}>
         <div className="absolute inset-0 border-[min(6px,1.2vw)] border-white/10 pointer-events-none z-30 rounded-[min(2.8rem,8vw)]"></div>
 
@@ -135,15 +134,6 @@ const App: React.FC = () => {
           onFullReset={restartFromBeginning}
           levelNum={currentLevelIdx + 1}
         />
-      </div>
-
-      {/* 하단 규칙 (간격 축소) */}
-      <div className="mt-3 text-white/50 font-medium text-center max-w-xs px-2 shrink-0">
-        <p className="text-[9px] leading-snug">
-          <span className="text-cyan-400 font-bold underline underline-offset-2">RULE</span><br />
-          잉크는 제한되어 있습니다. 둥지와 아기 하마 주변에는 선을 그을 수 없습니다.<br />
-          모든 방향에서 오는 피라니아를 효율적으로 막아보세요!
-        </p>
       </div>
     </div>
   );
