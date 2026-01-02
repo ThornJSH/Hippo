@@ -76,7 +76,7 @@ const App: React.FC = () => {
     return (
       <div className="w-full h-screen flex flex-col items-center justify-center bg-cyan-900 text-white">
         <div className="animate-bounce text-6xl mb-8">🦛</div>
-        <h2 className="text-2xl font-bold mb-2">Save Baby Hipo</h2>
+        <h2 className="text-2xl font-bold mb-2">아기 하마 구하기</h2>
         <p className="text-cyan-300 animate-pulse">{initStatus}</p>
         <div className="mt-8 w-64 h-2 bg-white/20 rounded-full overflow-hidden">
           <div className="h-full bg-cyan-400 animate-loading-bar"></div>
@@ -121,7 +121,7 @@ const App: React.FC = () => {
 
       <div className="mt-6 text-cyan-900 font-medium text-center max-w-md px-4">
         <p className="text-sm opacity-80 mb-2">
-          <b>규칙:</b> 잉크가 제한되어 있습니다. 둥지와 힙포 주변에는 선을 그을 수 없습니다.<br />
+          <b>규칙:</b> 잉크가 제한되어 있습니다. 둥지와 아기 하마 주변에는 선을 그을 수 없습니다.<br />
           선을 효율적으로 사용하여 모든 방향에서 오는 피라니아를 막으세요!
         </p>
       </div>
