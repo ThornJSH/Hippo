@@ -21,9 +21,9 @@ const App: React.FC = () => {
 
       // 사용자가 public/assets 폴더에 이미지를 넣어야 합니다.
       const localImages = {
-        hipo: '/assets/hipo.png',
-        piranha: '/assets/piranha.png',
-        background: '/assets/background.png'
+        hipo: `${import.meta.env.BASE_URL}assets/hipo.png`,
+        piranha: `${import.meta.env.BASE_URL}assets/piranha.png`,
+        background: `${import.meta.env.BASE_URL}assets/background.png`
       };
 
       setImages(localImages);
