@@ -109,8 +109,13 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border-[12px] border-slate-800 rounded-[3.5rem] overflow-hidden bg-white group" style={{ width: '424px', height: '724px' }}>
-        <div className="absolute inset-0 border-[6px] border-white/10 pointer-events-none z-30 rounded-[2.8rem]"></div>
+      <div className="relative shadow-[0_0_50px_rgba(0,0,0,0.5)] border-[min(12px,2.5vw)] border-slate-800 rounded-[min(3.5rem,10vw)] overflow-hidden bg-white group flex items-center justify-center"
+        style={{
+          height: 'min(724px, 82dvh)',
+          aspectRatio: '424 / 724',
+          maxWidth: '95vw'
+        }}>
+        <div className="absolute inset-0 border-[min(6px,1.2vw)] border-white/10 pointer-events-none z-30 rounded-[min(2.8rem,8vw)]"></div>
 
         <Game
           level={currentLevel}

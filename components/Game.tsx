@@ -341,7 +341,15 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
     const rect = canvasRef.current!.getBoundingClientRect();
     const cx = 'touches' in e ? (e as React.TouchEvent).touches[0].clientX : (e as React.MouseEvent).clientX;
     const cy = 'touches' in e ? (e as React.TouchEvent).touches[0].clientY : (e as React.MouseEvent).clientY;
-    return { x: cx - rect.left, y: cy - rect.top };
+
+    // 캔버스 내부 해상도(400x700)와 실제 화면에 표시되는 크기(rect) 사이의 비율 계산
+    const scaleX = CANVAS_WIDTH / rect.width;
+    const scaleY = CANVAS_HEIGHT / rect.height;
+
+    return {
+      x: (cx - rect.left) * scaleX,
+      y: (cy - rect.top) * scaleY
+    };
   };
 
   return (
@@ -350,7 +358,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
         <div className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-100" style={{ width: `${(inkRemaining / MAX_INK) * 100}%` }} />
         <span className="absolute inset-0 flex items-center justify-center text-[8px] font-black text-white mix-blend-overlay uppercase tracking-widest">Ink</span>
       </div>
-      <canvas ref={canvasRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} onTouchStart={handleMouseDown} onTouchMove={handleMouseMove} onTouchEnd={handleMouseUp} className="cursor-crosshair bg-cyan-50 shadow-inner" />
+      <canvas ref={canvasRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} onTouchStart={handleMouseDown} onTouchMove={handleMouseMove} onTouchEnd={handleMouseUp} className="cursor-crosshair bg-cyan-50 shadow-inner w-full h-full object-contain" />
       {gameState === GameState.COUNTDOWN && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
           <span className="text-8xl font-black text-white drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)] animate-pulse">{timer}</span>
