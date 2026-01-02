@@ -106,7 +106,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
       const wallFilter = { category: CATEGORY_WALL, mask: CATEGORY_HIPO | CATEGORY_PIRANHA };
 
       const bodies = [
-        Matter.Bodies.rectangle(CANVAS_WIDTH / 2, CANVAS_HEIGHT - 120, CANVAS_WIDTH, 50, {
+        Matter.Bodies.rectangle(CANVAS_WIDTH / 2, CANVAS_HEIGHT - 80, CANVAS_WIDTH, 50, {
           isStatic: true, label: 'ground',
           collisionFilter: { category: CATEGORY_WALL, mask: 0xFFFF }
         }),

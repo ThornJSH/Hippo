@@ -12,7 +12,7 @@ export const FORBIDDEN_RADIUS_HIPO = 50;
 const baseLevels: LevelConfig[] = [
   {
     id: 1,
-    hipoPos: { x: 200, y: 550 }, // 사용자가 지정한 동그라미 위치 (바닥은 580)
+    hipoPos: { x: 200, y: 590 }, // 빨간 네모 위치에 맞춰 하향 조정 (바닥 620)
     nests: [{ x: 200, y: 120 }],
     obstacles: [
       { x: 100, y: 280, w: 60, h: 20 },
@@ -49,7 +49,7 @@ const generateLevels = (): LevelConfig[] => {
       id: i,
       hipoPos: {
         x: 150 + Math.random() * (CANVAS_WIDTH - 300),
-        y: 500 + Math.random() * 80 // 하단 영역에서 생성되도록 조정
+        y: 540 + Math.random() * 60 // 하단 영역 최적화
       },
       nests: nests,
       obstacles: [
