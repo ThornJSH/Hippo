@@ -1,0 +1,2 @@
+body { margin: 0; overflow: hidden; background-color: #f0fdf4; font-family: sans-serif; }
+canvas { display: block; touch-action: none; }
