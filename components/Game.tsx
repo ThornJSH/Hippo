@@ -106,7 +106,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
       const wallFilter = { category: CATEGORY_WALL, mask: CATEGORY_HIPO | CATEGORY_PIRANHA };
 
       const bodies = [
-        Matter.Bodies.rectangle(CANVAS_WIDTH / 2, CANVAS_HEIGHT - 80, CANVAS_WIDTH, 50, {
+        Matter.Bodies.rectangle(CANVAS_WIDTH / 2, CANVAS_HEIGHT + 25, CANVAS_WIDTH, 50, {
           isStatic: true, label: 'ground',
           collisionFilter: { category: CATEGORY_WALL, mask: 0xFFFF }
         }),
@@ -353,7 +353,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full h-full overflow-hidden">
       <div className="absolute top-4 left-1/2 -translate-x-1/2 w-48 h-4 bg-gray-200 rounded-full border border-white/50 shadow-inner overflow-hidden z-10 box-border">
         <div className="h-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-100" style={{ width: `${(inkRemaining / MAX_INK) * 100}%` }} />
         <span className="absolute inset-0 flex items-center justify-center text-[8px] font-black text-white mix-blend-overlay uppercase tracking-widest">Ink</span>

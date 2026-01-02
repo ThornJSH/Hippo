@@ -12,22 +12,22 @@ export const FORBIDDEN_RADIUS_HIPO = 50;
 const baseLevels: LevelConfig[] = [
   {
     id: 1,
-    hipoPos: { x: 200, y: 590 }, // 빨간 네모 위치에 맞춰 하향 조정 (바닥 620)
+    hipoPos: { x: 200, y: 670 }, // 캔버스 최하단 (바닥 700)
     nests: [{ x: 200, y: 120 }],
     obstacles: [
-      { x: 100, y: 280, w: 60, h: 20 },
-      { x: 300, y: 280, w: 60, h: 20 }
+      { x: 100, y: 300, w: 80, h: 20 },
+      { x: 300, y: 300, w: 80, h: 20 }
     ],
-    beeCount: 10 // 초기 피라니아 수 감소
+    beeCount: 10
   },
   {
     id: 2,
-    hipoPos: { x: 200, y: 450 },
+    hipoPos: { x: 200, y: 670 },
     nests: [{ x: 80, y: 120 }, { x: 320, y: 120 }],
     obstacles: [
-      { x: 200, y: 300, w: 120, h: 20 },
-      { x: 100, y: 400, w: 20, h: 60 },
-      { x: 300, y: 400, w: 20, h: 60 }
+      { x: 200, y: 350, w: 120, h: 20 },
+      { x: 100, y: 480, w: 20, h: 60 },
+      { x: 300, y: 480, w: 20, h: 60 }
     ],
     beeCount: 15
   }
@@ -49,12 +49,12 @@ const generateLevels = (): LevelConfig[] => {
       id: i,
       hipoPos: {
         x: 150 + Math.random() * (CANVAS_WIDTH - 300),
-        y: 540 + Math.random() * 60 // 하단 영역 최적화
+        y: 600 + Math.random() * 70 // 최하단 영역
       },
       nests: nests,
       obstacles: [
-        { x: CANVAS_WIDTH / 2, y: 250 + (Math.random() - 0.5) * 150, w: 80 + Math.random() * 60, h: 20 },
-        { x: Math.random() * CANVAS_WIDTH, y: 480, w: 50, h: 20 }
+        { x: CANVAS_WIDTH / 2, y: 300 + (Math.random() - 0.5) * 150, w: 80 + Math.random() * 60, h: 20 },
+        { x: Math.random() * CANVAS_WIDTH, y: 520, w: 50, h: 20 }
       ],
       beeCount: 10 + (i * 2)
     });
