@@ -5,7 +5,7 @@ import { Point } from '../types';
 // 충돌 카테고리 설정
 export const CATEGORY_WALL = 0x0001;
 export const CATEGORY_LINE = 0x0002;
-export const CATEGORY_HIPO = 0x0004;
+export const CATEGORY_HIPPO = 0x0004;
 export const CATEGORY_PIRANHA = 0x0008;
 export const CATEGORY_OBSTACLE = 0x0010;
 
@@ -33,9 +33,9 @@ export const createDrawnBody = (points: Point[]) => {
         density: 0.008, // 질량 상향하여 피라니아 압박에 반응하게 함
         label: 'drawnLinePart',
         collisionFilter: {
-            category: CATEGORY_LINE,
-            // CATEGORY_WALL을 제외한 모든 것과 충돌 (벽은 통과)
-            mask: CATEGORY_HIPO | CATEGORY_PIRANHA | CATEGORY_OBSTACLE | CATEGORY_LINE
+          category: CATEGORY_LINE,
+          // CATEGORY_WALL을 제외한 모든 것과 충돌 (벽은 통과)
+          mask: CATEGORY_HIPPO | CATEGORY_PIRANHA | CATEGORY_OBSTACLE | CATEGORY_LINE
         }
       }
     );

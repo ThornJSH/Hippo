@@ -2,8 +2,8 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import Matter from 'matter-js';
 import { GameState, LevelConfig, Point, GameImages } from '../types';
-import { CANVAS_WIDTH, CANVAS_HEIGHT, PROTECT_TIME, BEE_FORCE, MAX_INK, FORBIDDEN_RADIUS_NEST, FORBIDDEN_RADIUS_HIPO } from '../constants';
-import { createDrawnBody, CATEGORY_WALL, CATEGORY_HIPO, CATEGORY_PIRANHA, CATEGORY_OBSTACLE, CATEGORY_LINE } from '../services/physicsService';
+import { CANVAS_WIDTH, CANVAS_HEIGHT, PROTECT_TIME, PIRANHA_FORCE, MAX_INK, FORBIDDEN_RADIUS_NEST, FORBIDDEN_RADIUS_HIPPO } from '../constants';
+import { createDrawnBody, CATEGORY_WALL, CATEGORY_HIPPO, CATEGORY_PIRANHA, CATEGORY_OBSTACLE, CATEGORY_LINE } from '../services/physicsService';
 
 interface GameProps {
   level: LevelConfig;
@@ -30,10 +30,10 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
   // 이미지 프리로드
   useEffect(() => {
     if (images) {
-      const hipoImg = new Image(); hipoImg.src = images.hipo;
+      const hippoImg = new Image(); hippoImg.src = images.hippo;
       const piranhaImg = new Image(); piranhaImg.src = images.piranha;
       const bgImg = new Image(); bgImg.src = images.background;
-      loadedImages.current = { hipo: hipoImg, piranha: piranhaImg, bg: bgImg };
+      loadedImages.current = { hippo: hippoImg, piranha: piranhaImg, bg: bgImg };
     }
   }, [images]);
 
@@ -56,7 +56,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
     Matter.Events.on(engine, 'collisionStart', (event) => {
       event.pairs.forEach((pair) => {
         const labels = [pair.bodyA.label, pair.bodyB.label];
-        if (labels.includes('hipo') && labels.includes('piranha')) {
+        if (labels.includes('hippo') && labels.includes('piranha')) {
           onLose();
         }
       });
@@ -74,17 +74,17 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
     const engine = engineRef.current;
     const forceListener = () => {
       if (gameState !== GameState.COUNTDOWN) return;
-      const hipoBody = engine.world.bodies.find(b => b.label === 'hipo');
-      if (!hipoBody) return;
+      const hippoBody = engine.world.bodies.find(b => b.label === 'hippo');
+      if (!hippoBody) return;
       const piranhas = engine.world.bodies.filter(b => b.label === 'piranha');
       piranhas.forEach(piranha => {
-        const dx = hipoBody.position.x - piranha.position.x;
-        const dy = hipoBody.position.y - piranha.position.y;
+        const dx = hippoBody.position.x - piranha.position.x;
+        const dy = hippoBody.position.y - piranha.position.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         if (distance > 0) {
           const noiseX = (Math.random() - 0.5) * 0.2;
           const noiseY = (Math.random() - 0.5) * 0.2;
-          const forceMagnitude = BEE_FORCE * piranha.mass;
+          const forceMagnitude = PIRANHA_FORCE * piranha.mass;
           Matter.Body.applyForce(piranha, piranha.position, {
             x: (dx / distance + noiseX) * forceMagnitude,
             y: (dy / distance + noiseY) * forceMagnitude
@@ -103,7 +103,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
       const world = engineRef.current.world;
       Matter.World.clear(world, false);
 
-      const wallFilter = { category: CATEGORY_WALL, mask: CATEGORY_HIPO | CATEGORY_PIRANHA };
+      const wallFilter = { category: CATEGORY_WALL, mask: CATEGORY_HIPPO | CATEGORY_PIRANHA };
 
       const bodies = [
         Matter.Bodies.rectangle(CANVAS_WIDTH / 2, CANVAS_HEIGHT + 25, CANVAS_WIDTH, 50, {
@@ -120,9 +120,9 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
           render: { fillStyle: '#1e40af' }
         })),
 
-        Matter.Bodies.circle(level.hipoPos.x, level.hipoPos.y, 30, {
-          label: 'hipo', restitution: 0.4, friction: 0.05, density: 0.01,
-          collisionFilter: { category: CATEGORY_HIPO, mask: 0xFFFF },
+        Matter.Bodies.circle(level.hippoPos.x, level.hippoPos.y, 30, {
+          label: 'hippo', restitution: 0.4, friction: 0.05, density: 0.01,
+          collisionFilter: { category: CATEGORY_HIPPO, mask: 0xFFFF },
           render: { visible: false }
         })
       ];
@@ -204,10 +204,10 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
         });
       });
 
-      const hipoBody = engineRef.current.world.bodies.find(b => b.label === 'hipo');
-      if (hipoBody) {
-        ctx.save(); ctx.translate(hipoBody.position.x, hipoBody.position.y); ctx.rotate(hipoBody.angle);
-        if (loadedImages.current.hipo) ctx.drawImage(loadedImages.current.hipo, -35, -40, 70, 70);
+      const hippoBody = engineRef.current.world.bodies.find(b => b.label === 'hippo');
+      if (hippoBody) {
+        ctx.save(); ctx.translate(hippoBody.position.x, hippoBody.position.y); ctx.rotate(hippoBody.angle);
+        if (loadedImages.current.hippo) ctx.drawImage(loadedImages.current.hippo, -35, -40, 70, 70);
         else { ctx.fillStyle = '#a855f7'; ctx.beginPath(); ctx.arc(0, 0, 30, 0, Math.PI * 2); ctx.fill(); }
         ctx.restore();
       }
@@ -241,7 +241,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
       const world = engineRef.current.world;
       const piranhas = [];
       level.nests.forEach(nest => {
-        for (let i = 0; i < Math.floor(level.beeCount / level.nests.length); i++) {
+        for (let i = 0; i < Math.floor(level.piranhaCount / level.nests.length); i++) {
           // 난이도에 따른 물리 설정 동적 계산 (1단계는 얌전하게, 갈수록 격렬하게)
           const bounce = Math.min(0.95, 0.4 + (levelNum * 0.02)); // 1단계 0.42 ~ 최대 0.95
           const dens = Math.min(0.015, 0.002 + (levelNum * 0.0003)); // 1단계 0.0023 ~ 최대 0.015
@@ -262,7 +262,7 @@ const Game: React.FC<GameProps> = ({ level, gameState, setGameState, onWin, onLo
     for (const nest of level.nests) {
       if (Math.sqrt(Math.pow(nest.x - x, 2) + Math.pow(nest.y - y, 2)) < FORBIDDEN_RADIUS_NEST) return true;
     }
-    if (Math.sqrt(Math.pow(level.hipoPos.x - x, 2) + Math.pow(level.hipoPos.y - y, 2)) < FORBIDDEN_RADIUS_HIPO) return true;
+    if (Math.sqrt(Math.pow(level.hippoPos.x - x, 2) + Math.pow(level.hippoPos.y - y, 2)) < FORBIDDEN_RADIUS_HIPPO) return true;
     for (const obs of level.obstacles) {
       const left = obs.x - obs.w / 2; const right = obs.x + obs.w / 2;
       const top = obs.y - obs.h / 2; const bottom = obs.y + obs.h / 2;

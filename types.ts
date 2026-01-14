@@ -14,15 +14,15 @@ export interface Point {
 }
 
 export interface GameImages {
-  hipo: string;
+  hippo: string;
   piranha: string;
   background: string;
 }
 
 export interface LevelConfig {
   id: number;
-  hipoPos: Point;
+  hippoPos: Point;
   nests: Point[]; // 다중 둥지 지원
   obstacles: { x: number, y: number, w: number, h: number }[];
-  beeCount: number; // 피라니아 수
+  piranhaCount: number; // 피라니아 수
 }

@@ -4,32 +4,32 @@ import { LevelConfig } from './types';
 export const CANVAS_WIDTH = 400;
 export const CANVAS_HEIGHT = 700;
 export const PROTECT_TIME = 10;
-export const BEE_FORCE = 0.0028;
+export const PIRANHA_FORCE = 0.0028;
 export const MAX_INK = 500; // 난이도 조정을 위해 잉크 양 대폭 축소
 export const FORBIDDEN_RADIUS_NEST = 70;
-export const FORBIDDEN_RADIUS_HIPO = 50;
+export const FORBIDDEN_RADIUS_HIPPO = 50;
 
 const baseLevels: LevelConfig[] = [
   {
     id: 1,
-    hipoPos: { x: 200, y: 670 }, // 캔버스 최하단 (바닥 700)
+    hippoPos: { x: 200, y: 670 }, // 캔버스 최하단 (바닥 700)
     nests: [{ x: 200, y: 120 }],
     obstacles: [
       { x: 100, y: 300, w: 80, h: 20 },
       { x: 300, y: 300, w: 80, h: 20 }
     ],
-    beeCount: 10
+    piranhaCount: 10
   },
   {
     id: 2,
-    hipoPos: { x: 200, y: 670 },
+    hippoPos: { x: 200, y: 670 },
     nests: [{ x: 80, y: 120 }, { x: 320, y: 120 }],
     obstacles: [
       { x: 200, y: 350, w: 120, h: 20 },
       { x: 100, y: 480, w: 20, h: 60 },
       { x: 300, y: 480, w: 20, h: 60 }
     ],
-    beeCount: 15
+    piranhaCount: 15
   }
 ];
 
@@ -47,7 +47,7 @@ const generateLevels = (): LevelConfig[] => {
 
     levels.push({
       id: i,
-      hipoPos: {
+      hippoPos: {
         x: 150 + Math.random() * (CANVAS_WIDTH - 300),
         y: 600 + Math.random() * 70 // 최하단 영역
       },
@@ -56,7 +56,7 @@ const generateLevels = (): LevelConfig[] => {
         { x: CANVAS_WIDTH / 2, y: 300 + (Math.random() - 0.5) * 150, w: 80 + Math.random() * 60, h: 20 },
         { x: Math.random() * CANVAS_WIDTH, y: 520, w: 50, h: 20 }
       ],
-      beeCount: 10 + (i * 2)
+      piranhaCount: 10 + (i * 2)
     });
   }
   return levels;

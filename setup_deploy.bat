@@ -59,8 +59,8 @@ git remote -v >nul 2>&1
 IF %ERRORLEVEL% NEQ 0 (
     echo [알림] GitHub 레포지토리 연결이 필요합니다.
     echo.
-    echo [중요] GitHub 웹사이트에서 'Hipo'라는 이름으로 '빈 레포지토리'를 먼저 만들어주세요.
-    echo 주소 형식: https://github.com/사용자아이디/Hipo.git
+    echo [중요] GitHub 웹사이트에서 'HIPPO'라는 이름으로 '빈 레포지토리'를 먼저 만들어주세요.
+    echo 주소 형식: https://github.com/사용자아이디/HIPPO.git
     echo.
     
     set /p REPO_URL="만드신 레포지토리 주소를 붙여넣기 해주세요: "
@@ -112,7 +112,7 @@ IF %ERRORLEVEL% EQU 0 (
     echo [성공] 배포가 완료되었습니다!
     echo.
     echo 잠시 후 1~5분 뒤 GitHub 레포지토리 설정 - Pages에서 주소를 확인할 수 있습니다.
-    echo 예상 주소: https://[사용자명].github.io/Hipo/
+    echo 예상 주소: https://[사용자명].github.io/HIPPO/
 ) ELSE (
     echo.
     echo [오류] 배포 중 문제가 발생했습니다.
